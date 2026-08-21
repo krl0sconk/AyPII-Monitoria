@@ -1,0 +1,35 @@
+==============================================================
+ VECTORES - Insercion de elementos
+==============================================================
+
+--------------------------------------------------------------
+ a) Insercion al final (vector no ordenado)
+--------------------------------------------------------------
+SUBRUTINA insertar_final(VEC, TAM, VAL)
+   TAM <-- TAM + 1
+   VEC(TAM) <-- VAL
+F_SUBRUTINA
+
+--------------------------------------------------------------
+ b) Insercion en una posicion dada (recorre el resto)
+--------------------------------------------------------------
+SUBRUTINA insertar_posicion(VEC, TAM, POS, VAL)
+   PARA I = TAM, POS, -1 HAGA
+      VEC(I + 1) <-- VEC(I)
+   F_PARA
+   VEC(POS) <-- VAL
+   TAM <-- TAM + 1
+F_SUBRUTINA
+
+--------------------------------------------------------------
+ c) Insercion manteniendo el vector ordenado ascendentemente
+--------------------------------------------------------------
+SUBRUTINA insertar_ordenado(VEC, TAM, VAL)
+   I <-- TAM
+   MQ ((I >= 1) y (VEC(I) > VAL)) HAGA
+      VEC(I + 1) <-- VEC(I)
+      I <-- I - 1
+   F_MQ
+   VEC(I + 1) <-- VAL
+   TAM <-- TAM + 1
+F_SUBRUTINA

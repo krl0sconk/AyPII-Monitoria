@@ -1,0 +1,20 @@
+==============================================================
+ CADENAS - Palindromo (adaptado del Manual, cap. 2, ejemplo 2)
+==============================================================
+
+FUNCION invertir(CADENA)
+   L <-- LONG(CADENA)
+   C2 <-- ''
+   PARA I = L, 1, -1 HAGA
+      C2 <-- C2 || SUBSTR(CADENA, I, 1)
+   F_PARA
+   invertir <-- C2
+F_FUNCION
+
+FUNCION es_palindromo(CADENA)
+   SI (CADENA = invertir(CADENA)) ENTONCES
+      es_palindromo <-- 1
+   SINO
+      es_palindromo <-- 0
+   F_SI
+F_FUNCION

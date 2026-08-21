@@ -1,0 +1,32 @@
+==============================================================
+ LISTAS ENLAZADAS - Nodos con dato + apuntador al siguiente
+==============================================================
+
+{ NODO: dato, siguiente }
+
+SUBRUTINA insertar_inicio(CABEZA, VAL)
+   NUEVO <-- crear_nodo(VAL)
+   NUEVO.siguiente <-- CABEZA
+   CABEZA <-- NUEVO
+F_SUBRUTINA
+
+SUBRUTINA insertar_final(CABEZA, VAL)
+   NUEVO <-- crear_nodo(VAL)
+   SI (CABEZA = NULO) ENTONCES
+      CABEZA <-- NUEVO
+   SINO
+      ACTUAL <-- CABEZA
+      MQ (ACTUAL.siguiente <> NULO) HAGA
+         ACTUAL <-- ACTUAL.siguiente
+      F_MQ
+      ACTUAL.siguiente <-- NUEVO
+   F_SI
+F_SUBRUTINA
+
+SUBRUTINA recorrer(CABEZA)
+   ACTUAL <-- CABEZA
+   MQ (ACTUAL <> NULO) HAGA
+      ESCRIBA ACTUAL.dato
+      ACTUAL <-- ACTUAL.siguiente
+   F_MQ
+F_SUBRUTINA

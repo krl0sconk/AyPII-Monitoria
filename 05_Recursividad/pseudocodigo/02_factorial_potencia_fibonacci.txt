@@ -1,0 +1,27 @@
+==============================================================
+ RECURSIVIDAD - Factorial, potencia y Fibonacci
+==============================================================
+
+FUNCION factorial(N)
+   SI (N = 0) ENTONCES              { Caso base }
+      factorial <-- 1
+   SINO
+      factorial <-- N * factorial(N - 1)   { Llamador mas pequeno }
+   F_SI
+F_FUNCION
+
+FUNCION potencia(X, N)
+   SI (N = 1) ENTONCES
+      potencia <-- X
+   SINO
+      potencia <-- X * potencia(X, N - 1)
+   F_SI
+F_FUNCION
+
+FUNCION fibonacci(N)
+   SI (N <= 1) ENTONCES
+      fibonacci <-- N
+   SINO
+      fibonacci <-- fibonacci(N - 2) + fibonacci(N - 1)
+   F_SI
+F_FUNCION

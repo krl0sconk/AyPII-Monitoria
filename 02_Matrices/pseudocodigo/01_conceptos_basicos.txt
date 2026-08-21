@@ -1,0 +1,19 @@
+==============================================================
+ MATRICES - Lectura, escritura y recorridos
+==============================================================
+
+SUBRUTINA leamatriz(N, M, MAT)
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         LEA MAT(I, J)
+      F_PARA
+   F_PARA
+F_SUBRUTINA
+
+SUBRUTINA escribamatriz(N, M, MAT)
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         ESCRIBA MAT(I, J)
+      F_PARA
+   F_PARA
+F_SUBRUTINA

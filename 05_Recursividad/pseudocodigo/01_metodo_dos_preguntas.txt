@@ -1,0 +1,11 @@
+==============================================================
+ RECURSIVIDAD - Metodo de las dos preguntas
+==============================================================
+
+1) CASO BASE: hay una salida no recursiva y el procedimiento funciona
+   para ese caso.
+2) LLAMADOR MAS PEQUENO: cada llamada recursiva se refiere a un caso mas
+   pequeno del problema original.
+
+Si alguna de las dos preguntas no se cumple, la recursividad no termina o
+no es correcta.

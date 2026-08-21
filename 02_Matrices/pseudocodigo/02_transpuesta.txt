@@ -1,0 +1,29 @@
+==============================================================
+ MATRICES - Transpuesta
+ Gap critico: no habia ningun ejemplo en apuntes ni en el repo anterior.
+ Entra en Parcial 1 (semana 6).
+==============================================================
+
+--------------------------------------------------------------
+ a) Transpuesta sobre una matriz resultante (no necesita ser cuadrada)
+--------------------------------------------------------------
+SUBRUTINA transpuesta(N, M, MAT, MATT)
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         MATT(J, I) <-- MAT(I, J)
+      F_PARA
+   F_PARA
+F_SUBRUTINA
+
+--------------------------------------------------------------
+ b) Transpuesta en sitio (SOLO valida si la matriz es cuadrada)
+--------------------------------------------------------------
+SUBRUTINA transpuesta_en_sitio(N, MAT)
+   PARA I = 2, N, 1 HAGA
+      PARA J = 1, I - 1, 1 HAGA
+         T <-- MAT(I, J)
+         MAT(I, J) <-- MAT(J, I)
+         MAT(J, I) <-- T
+      F_PARA
+   F_PARA
+F_SUBRUTINA

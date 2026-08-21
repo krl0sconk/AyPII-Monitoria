@@ -1,0 +1,13 @@
+==============================================================
+ CONCEPTO DE MEMORIA - Estructuras estaticas y dinamicas
+ (Tema de cierre del curso, 2 horas segun la parcelacion oficial)
+==============================================================
+
+ESTRUCTURA ESTATICA: el tamano se define antes de ejecutar y no cambia.
+   Ejemplo: todo lo visto en el curso (vectores y matrices de tamano fijo).
+
+ESTRUCTURA DINAMICA: el tamano crece o decrece durante la ejecucion.
+   Ejemplos: pilas, colas y listas enlazadas implementadas con nodos.
+
+Un NODO tipico tiene dos partes: el dato y un apuntador (o mas de uno) al
+siguiente nodo.

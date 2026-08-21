@@ -1,0 +1,23 @@
+==============================================================
+ PROCEDIMIENTOS - Subrutinas y funciones (Manual, cap. 1)
+==============================================================
+
+Subrutina: se invoca con EJECUTE, puede tener parametros E, S o E/S, no
+representa una variable.
+
+   SUBRUTINA nombre(lista de parametros)
+      { cuerpo }
+   F_SUBRUTINA
+
+   EJECUTE nombre(parametros actuales)
+
+Funcion: se invoca sin EJECUTE, el nombre de la funcion ES una variable con
+el resultado. Solo parametros de entrada (E), un unico valor de salida.
+
+   FUNCION nombre(lista de parametros)
+      { cuerpo }
+      nombre <-- resultado
+   F_FUNCION
+
+Regla de oro: si el resultado es un conjunto de datos (vector, matriz), debe
+resolverse con SUBRUTINA, nunca con FUNCION.

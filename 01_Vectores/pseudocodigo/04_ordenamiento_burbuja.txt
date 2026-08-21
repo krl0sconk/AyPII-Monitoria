@@ -1,0 +1,54 @@
+==============================================================
+ VECTORES - Ordenamiento burbuja (metodo del libro, dos formas)
+ Critico: entra en Parcial 1 (semana 6)
+==============================================================
+
+--------------------------------------------------------------
+ a) Burbuja clasico - ascendente
+--------------------------------------------------------------
+SUBRUTINA burbuja_ascendente(VEC, N)
+   PARA I = 1, N - 1, 1 HAGA
+      PARA J = 1, N - I, 1 HAGA
+         SI (VEC(J) > VEC(J + 1)) ENTONCES
+            T <-- VEC(J)
+            VEC(J) <-- VEC(J + 1)
+            VEC(J + 1) <-- T
+         F_SI
+      F_PARA
+   F_PARA
+F_SUBRUTINA
+
+--------------------------------------------------------------
+ b) Burbuja con bandera (se detiene si ya quedo ordenado)
+--------------------------------------------------------------
+SUBRUTINA burbuja_optimizada(VEC, N)
+   HAY_CAMBIO <-- 1
+   I <-- 1
+   MQ ((I <= N - 1) y (HAY_CAMBIO = 1)) HAGA
+      HAY_CAMBIO <-- 0
+      PARA J = 1, N - I, 1 HAGA
+         SI (VEC(J) > VEC(J + 1)) ENTONCES
+            T <-- VEC(J)
+            VEC(J) <-- VEC(J + 1)
+            VEC(J + 1) <-- T
+            HAY_CAMBIO <-- 1
+         F_SI
+      F_PARA
+      I <-- I + 1
+   F_MQ
+F_SUBRUTINA
+
+--------------------------------------------------------------
+ c) Burbuja descendente (solo cambia la comparacion)
+--------------------------------------------------------------
+SUBRUTINA burbuja_descendente(VEC, N)
+   PARA I = 1, N - 1, 1 HAGA
+      PARA J = 1, N - I, 1 HAGA
+         SI (VEC(J) < VEC(J + 1)) ENTONCES
+            T <-- VEC(J)
+            VEC(J) <-- VEC(J + 1)
+            VEC(J + 1) <-- T
+         F_SI
+      F_PARA
+   F_PARA
+F_SUBRUTINA

@@ -1,0 +1,22 @@
+==============================================================
+ MATRICES - Ordenamiento burbuja
+ Idea: tratar la matriz como si fuera un vector recorrido fila por fila.
+==============================================================
+
+SUBRUTINA burbuja_matriz(N, M, MAT)
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         PARA K = I, N, 1 HAGA
+            PARA P = 1, M, 1 HAGA
+               SI ((K > I) o (P > J)) ENTONCES
+                  SI (MAT(I, J) > MAT(K, P)) ENTONCES
+                     T <-- MAT(I, J)
+                     MAT(I, J) <-- MAT(K, P)
+                     MAT(K, P) <-- T
+                  F_SI
+               F_SI
+            F_PARA
+         F_PARA
+      F_PARA
+   F_PARA
+F_SUBRUTINA

@@ -1,0 +1,25 @@
+==============================================================
+ PILAS (Stack) - LIFO: el ultimo que entra es el primero que sale
+==============================================================
+
+SUBRUTINA apilar(PILA, TOPE, VAL)
+   TOPE <-- TOPE + 1
+   PILA(TOPE) <-- VAL
+F_SUBRUTINA
+
+FUNCION desapilar(PILA, TOPE)
+   SI (TOPE = 0) ENTONCES
+      ESCRIBA "Pila vacia"
+   SINO
+      desapilar <-- PILA(TOPE)
+      TOPE <-- TOPE - 1
+   F_SI
+F_FUNCION
+
+FUNCION pila_vacia(TOPE)
+   SI (TOPE = 0) ENTONCES
+      pila_vacia <-- 1
+   SINO
+      pila_vacia <-- 0
+   F_SI
+F_FUNCION

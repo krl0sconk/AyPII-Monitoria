@@ -1,0 +1,25 @@
+==============================================================
+ VECTORES - Borrado de elementos por posicion
+==============================================================
+
+SUBRUTINA borrar_posicion(VEC, TAM, POS)
+   PARA I = POS, TAM - 1, 1 HAGA
+      VEC(I) <-- VEC(I + 1)
+   F_PARA
+   TAM <-- TAM - 1
+F_SUBRUTINA
+
+--------------------------------------------------------------
+ Borrado por valor (busca la primera ocurrencia y borra)
+--------------------------------------------------------------
+SUBRUTINA borrar_valor(VEC, TAM, VAL)
+   POS <-- 0
+   PARA I = 1, TAM, 1 HAGA
+      SI ((VEC(I) = VAL) y (POS = 0)) ENTONCES
+         POS <-- I
+      F_SI
+   F_PARA
+   SI (POS > 0) ENTONCES
+      EJECUTE borrar_posicion(VEC, TAM, POS)
+   F_SI
+F_SUBRUTINA

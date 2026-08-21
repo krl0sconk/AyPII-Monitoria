@@ -1,0 +1,12 @@
+*.class
+build/
+dist/
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db

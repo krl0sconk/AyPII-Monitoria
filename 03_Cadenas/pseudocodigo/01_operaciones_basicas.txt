@@ -1,0 +1,17 @@
+==============================================================
+ CADENAS - Operaciones basicas (segun Manual de Informatica II)
+==============================================================
+
+LONG(cad)              -> tamano de la cadena
+DER(cad, n)             -> extrae n caracteres desde la derecha
+IZQ(cad, n)             -> extrae n caracteres desde la izquierda
+SUBSTR(cad, posini, n)   -> extrae n caracteres desde posini
+VAL(cad)                 -> convierte cadena numerica a numero
+STR(n)                    -> convierte numero a cadena
+A || B                    -> concatenacion (A || B distinto de B || A)
+
+Ejemplo:
+   C <-- 'casa'
+   D <-- LONG(C)        { D = 4 }
+   L <-- DER(C, 2)       { L = 'sa' }
+   L <-- IZQ(C, 2)        { L = 'ca' }

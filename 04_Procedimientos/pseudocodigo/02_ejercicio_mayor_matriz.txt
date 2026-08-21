@@ -1,0 +1,47 @@
+==============================================================
+ PROCEDIMIENTOS - Ejercicio integrador (adaptado del Manual cap.1, ej.2)
+ Dada una matriz A de N x M: a) mayor elemento, b) transpuesta si es
+ cuadrada, c) vector con los elementos pares.
+==============================================================
+
+SUBRUTINA mayor_matriz(N, M, MAT)
+   MAY <-- MAT(1, 1)
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         SI (MAT(I, J) > MAY) ENTONCES
+            MAY <-- MAT(I, J)
+         F_SI
+      F_PARA
+   F_PARA
+   ESCRIBA "El mayor elemento de la matriz es", MAY
+F_SUBRUTINA
+
+SUBRUTINA pares_matriz(N, M, MAT, VEC, K)
+   K <-- 0
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         SI (MAT(I, J) MOD 2 = 0) ENTONCES
+            K <-- K + 1
+            VEC(K) <-- MAT(I, J)
+         F_SI
+      F_PARA
+   F_PARA
+F_SUBRUTINA
+
+INICIO
+   LEA N, M
+   EJECUTE leamatriz(N, M, A)
+   EJECUTE mayor_matriz(N, M, A)
+   SI (N = M) ENTONCES
+      EJECUTE transpuesta(N, M, A, B)
+      EJECUTE escribamatriz(N, M, B)
+   SINO
+      ESCRIBA "No tiene transpuesta"
+   F_SI
+   EJECUTE pares_matriz(N, M, A, C, K1)
+   SI (K1 > 0) ENTONCES
+      EJECUTE escribavector(K1, C)
+   SINO
+      ESCRIBA "La matriz no tiene numeros pares"
+   F_SI
+FIN

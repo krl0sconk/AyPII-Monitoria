@@ -1,0 +1,15 @@
+==============================================================
+ CADENAS - Contar vocales
+==============================================================
+
+FUNCION contar_vocales(CADENA)
+   L <-- LONG(CADENA)
+   CONT <-- 0
+   PARA I = 1, L, 1 HAGA
+      Z <-- SUBSTR(CADENA, I, 1)
+      SI ((Z = 'a') o (Z = 'e') o (Z = 'i') o (Z = 'o') o (Z = 'u')) ENTONCES
+         CONT <-- CONT + 1
+      F_SI
+   F_PARA
+   contar_vocales <-- CONT
+F_FUNCION

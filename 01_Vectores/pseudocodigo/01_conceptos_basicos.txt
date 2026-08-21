@@ -1,0 +1,25 @@
+==============================================================
+ VECTORES - Conceptos basicos: lectura, escritura, recorridos
+==============================================================
+
+SUBRUTINA leavector(TAM, VEC)
+   PARA I = 1, TAM, 1 HAGA
+      LEA VEC(I)
+   F_PARA
+F_SUBRUTINA
+
+SUBRUTINA escribavector(TAM, VEC)
+   PARA I = 1, TAM, 1 HAGA
+      ESCRIBA VEC(I)
+   F_PARA
+F_SUBRUTINA
+
+FUNCION mayor(TAM, VEC)
+   MAY <-- VEC(1)
+   PARA I = 2, TAM, 1 HAGA
+      SI (VEC(I) > MAY) ENTONCES
+         MAY <-- VEC(I)
+      F_SI
+   F_PARA
+   mayor <-- MAY
+F_FUNCION

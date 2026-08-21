@@ -1,0 +1,51 @@
+==============================================================
+ COLAS (Queue) - FIFO: el primero que entra es el primero que sale
+==============================================================
+
+SUBRUTINA encolar(COLA, FRENTE, FINAL, VAL)
+   FINAL <-- FINAL + 1
+   COLA(FINAL) <-- VAL
+   SI (FRENTE = 0) ENTONCES
+      FRENTE <-- 1
+   F_SI
+F_SUBRUTINA
+
+FUNCION desencolar(COLA, FRENTE, FINAL)
+   SI (FRENTE = 0) ENTONCES
+      ESCRIBA "Cola vacia"
+   SINO
+      desencolar <-- COLA(FRENTE)
+      SI (FRENTE = FINAL) ENTONCES
+         FRENTE <-- 0
+         FINAL <-- 0
+      SINO
+         FRENTE <-- FRENTE + 1
+      F_SI
+   F_SI
+F_FUNCION
+
+==============================================================
+ COLA CIRCULAR - reutiliza posiciones liberadas al inicio del arreglo
+==============================================================
+
+SUBRUTINA encolar_circular(COLA, FRENTE, FINAL, TAM, VAL)
+   FINAL <-- (FINAL MOD TAM) + 1
+   COLA(FINAL) <-- VAL
+   SI (FRENTE = 0) ENTONCES
+      FRENTE <-- 1
+   F_SI
+F_SUBRUTINA
+
+FUNCION desencolar_circular(COLA, FRENTE, FINAL, TAM)
+   SI (FRENTE = 0) ENTONCES
+      ESCRIBA "Cola vacia"
+   SINO
+      desencolar_circular <-- COLA(FRENTE)
+      SI (FRENTE = FINAL) ENTONCES
+         FRENTE <-- 0
+         FINAL <-- 0
+      SINO
+         FRENTE <-- (FRENTE MOD TAM) + 1
+      F_SI
+   F_SI
+F_FUNCION

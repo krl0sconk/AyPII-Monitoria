@@ -1,0 +1,25 @@
+==============================================================
+ MATRICES - Suma, resta y multiplicacion
+==============================================================
+
+SUBRUTINA suma_resta(M1, M2, M3, N, M, SIGNO)
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, M, 1 HAGA
+         M3(I, J) <-- M1(I, J) + SIGNO * M2(I, J)
+      F_PARA
+   F_PARA
+F_SUBRUTINA
+{ SIGNO = 1 para suma, SIGNO = -1 para resta }
+
+SUBRUTINA multiplicar(M1, M2, M3, N, M)
+   { M1 es N x M, M2 es M x N, resultado M3 es N x N }
+   PARA I = 1, N, 1 HAGA
+      PARA J = 1, N, 1 HAGA
+         ACUM <-- 0
+         PARA K = 1, M, 1 HAGA
+            ACUM <-- ACUM + (M1(I, K) * M2(K, J))
+         F_PARA
+         M3(I, J) <-- ACUM
+      F_PARA
+   F_PARA
+F_SUBRUTINA
