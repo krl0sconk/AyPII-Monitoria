@@ -9,7 +9,8 @@ y `java/` (implementación equivalente, compilada y probada).
 
 ## Estructura
 
-- `00_Recursos/` — convenciones de sintaxis
+- `00_Recursos/` — convenciones de sintaxis, parcelación oficial del curso
+  (`Parcelacion.pdf`) y Manual de Informática II de Jabba (`Informatica_II_Libro.pdf`)
 - `01_Vectores/` — conceptos, inserción, borrado, burbuja
 - `02_Matrices/` — conceptos, **transpuesta**, burbuja, operaciones
 - `03_Cadenas/` — operaciones básicas, palíndromo, `Cadenas.java` (tabla de
