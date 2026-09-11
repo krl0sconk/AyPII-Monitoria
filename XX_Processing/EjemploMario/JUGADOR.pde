@@ -9,10 +9,9 @@ float vcaminando = 3, vcorriendo = vcaminando*5.0;
 float vy;
 
 
-boolean arriba, abajo, izquierda, derecha;
+boolean izquierda, derecha;
 boolean corriendo = false;
 boolean mirandoDerecha = false;
-boolean saltando = false;
 
 int[] animacion;                    
 int frameActual  = 0;               
@@ -49,26 +48,24 @@ void dibujarJugador(){
 
 void moverJugador(){
   float v = vcaminando;
-  
+  if (corriendo) v = vcorriendo;
+
+  float vx = 0;
+  if (izquierda) { vx -= v; mirandoDerecha = false; }
+  if (derecha)   { vx += v; mirandoDerecha = true;  }
+
+  x += vx;
+  resolverX(vx);
+
   vy += gravedad;
   y  += vy;
-  
-  if(corriendo) v = vcorriendo;
-  if (izquierda) { x -= v;  mirandoDerecha = false;}
-  if (derecha)   { x += v;  mirandoDerecha = true;}
-  /*if(y>height){
-      y=0;
-  }
-  if (arriba)      y -= v;                
-  if (abajo)       y += v;
-  */
-  if(y>440) saltando = false;
-  if(saltando) cambiarAnimacion(SALTO); 
-  else if (!izquierda && !derecha && !arriba && !abajo) cambiarAnimacion(IDLE);
-  else if(corriendo)                               cambiarAnimacion(CORRER);  
-  else                                             cambiarAnimacion(CAMINAR);
-  
+  enSuelo = false;
+  resolverY();
+
+  if (!enSuelo)                          cambiarAnimacion(SALTO);
+  else if (!izquierda && !derecha)       cambiarAnimacion(IDLE);
+  else if (corriendo)                    cambiarAnimacion(CORRER);
+  else                                    cambiarAnimacion(CAMINAR);
+
   x = constrain(x, 30, width-30);
-  y = constrain(y, 30, height-30);
-  //vy = constrain(vy, 0, 9);
 }
