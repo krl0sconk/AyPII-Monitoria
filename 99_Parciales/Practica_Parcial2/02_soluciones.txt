@@ -1,0 +1,457 @@
+==============================================================
+ PRACTICA PARCIAL 2 - Cadenas y Procedimientos
+ SOLUCIONES (intente primero con 01_enunciados.txt)
+==============================================================
+
+Toda la logica se ejecuto con los ejemplos de los enunciados y da
+exactamente las salidas mostradas.
+
+
+==============================================================
+ EJERCICIO 1A - Trazas
+==============================================================
+
+C = 'ALGORITMIA'  ->  A1 L2 G3 O4 R5 I6 T7 M8 I9 A10
+
+   Var   Valor       Por que
+   ---   ---------   -------------------------------------------
+   A     10          LONG cuenta los 10 caracteres
+   B     'ALGO'      los 4 primeros
+   D     'MIA'       los 3 ultimos
+   E     'RIT'       3 caracteres desde la posicion 5
+   F     'MIAALGO'   D va primero: el orden de || importa
+   G     'IA20'      SUBSTR(C, 9, 2) = 'IA'  y  STR(20) = '20'
+   H     27          SUBSTR('2026',3,2) = '26', VAL -> 26, mas 1
+
+G y H son las que mas fallan. En G, sin STR no se puede concatenar
+un numero. En H el resultado es un numero, no la cadena '261'.
+
+
+==============================================================
+ EJERCICIO 1B - La funcion misterio
+==============================================================
+
+El PARA avanza de 2 en 2 y cada letra se pone ADELANTE de R: toma
+las letras de las posiciones impares y las invierte.
+
+   misterio('PROGRAMA')  toma P,O,R,M (I = 1,3,5,7)  -> 'MROP'
+   misterio('PARCIAL')   toma P,R,I,L (I = 1,3,5,7)  -> 'LIRP'
+   misterio('LIRP')      toma L,R     (I = 1,3)      -> 'RL'
+
+Salida:
+   MROP
+   RL
+
+En la llamada compuesta se evalua primero la de adentro.
+
+
+==============================================================
+ EJERCICIO 2 - FUNCION o SUBRUTINA
+==============================================================
+
+   a. Contar vocales            FUNCION    devuelve un numero
+   b. Invertir una cadena       FUNCION    una cadena es UN valor
+   c. Vector de palabras        SUBRUTINA  devuelve vector + cantidad
+   d. Es palindroma?            FUNCION    devuelve 0 o 1
+   e. Mas larga y su posicion   SUBRUTINA  son dos valores
+   f. Escribir cada palabra     SUBRUTINA  es una accion, no retorna
+
+La b es la trampa: muchos responden SUBRUTINA porque "devuelve
+muchas letras", pero la cadena viaja como un solo dato.
+
+
+==============================================================
+ EJERCICIO 3 - Buscar y reemplazar
+==============================================================
+
+Contar usa el patron del Manual con tope LONG(FRA) - LONG(P) + 1.
+Reemplazar necesita MQ porque el indice salta distinto segun
+encuentre o no la palabra.
+
+FUNCION contar(FRA, P)
+   C <-- 0
+   PARA I = 1, LONG(FRA) - LONG(P) + 1, 1 HAGA
+      SI (SUBSTR(FRA, I, LONG(P)) = P) ENTONCES
+         C <-- C + 1
+      F_SI
+   F_PARA
+   contar <-- C
+F_FUNCION
+
+FUNCION reemplazar(FRA, P1, P2)
+   R <-- ''
+   I <-- 1
+   MQ (I <= LONG(FRA)) HAGA
+      SW <-- 0
+      SI (I <= LONG(FRA) - LONG(P1) + 1) ENTONCES
+         SI (SUBSTR(FRA, I, LONG(P1)) = P1) ENTONCES
+            SW <-- 1
+         F_SI
+      F_SI
+      SI (SW = 1) ENTONCES
+         R <-- R || P2
+         I <-- I + LONG(P1)              { salta toda la palabra }
+      SINO
+         R <-- R || SUBSTR(FRA, I, 1)
+         I <-- I + 1
+      F_SI
+   F_MQ
+   reemplazar <-- R
+F_FUNCION
+
+INICIO
+   LEA FRA, P1, P2
+   ESCRIBA 'Apariciones: ', contar(FRA, P1)
+   ESCRIBA reemplazar(FRA, P1, P2)
+FIN
+
+- Los dos SI anidados evitan pedir un SUBSTR que se salga de la
+  frase cerca del final.
+- Se copia con R || X (no X || R): aqui se quiere el mismo orden.
+- Detalle fino: contar si cuenta apariciones solapadas ('AA' en
+  'AAA' da 2) y reemplazar no. Con frases normales coinciden.
+
+
+==============================================================
+ EJERCICIO 4 - Anagramas
+==============================================================
+
+FUNCION veces(CAD, X)
+   C <-- 0
+   PARA I = 1, LONG(CAD), 1 HAGA
+      SI (SUBSTR(CAD, I, 1) = X) ENTONCES
+         C <-- C + 1
+      F_SI
+   F_PARA
+   veces <-- C
+F_FUNCION
+
+FUNCION anagramas(A, B)
+   SW <-- 1
+   SI (LONG(A) <> LONG(B)) ENTONCES
+      SW <-- 0
+   F_SI
+   I <-- 1
+   MQ (I <= LONG(A) Y SW = 1) HAGA
+      X <-- SUBSTR(A, I, 1)
+      SI (veces(A, X) <> veces(B, X)) ENTONCES
+         SW <-- 0
+      F_SI
+      I <-- I + 1
+   F_MQ
+   anagramas <-- SW
+F_FUNCION
+
+INICIO
+   CANT <-- 0
+   LEA A
+   MQ (A <> 'FIN') HAGA
+      LEA B
+      SI (anagramas(A, B) = 1) ENTONCES
+         ESCRIBA A, ' y ', B, ' son anagramas'
+         CANT <-- CANT + 1
+      F_SI
+      LEA A
+   F_MQ
+   ESCRIBA 'Pares de anagramas: ', CANT
+FIN
+
+Por que basta revisar las letras de A? Si cada letra de A esta igual
+numero de veces en B, esas letras ya suman LONG(A) caracteres de B.
+Como LONG(A) = LONG(B), en B no queda espacio para ninguna letra
+extra. Por eso comparar longitudes NO es opcional: sin eso, 'ROMA' y
+'ROMAS' pasarian.
+
+
+==============================================================
+ EJERCICIO 5 - Cifrado Cesar
+==============================================================
+
+La vuelta de Z a A sale de una sola formula:
+   NP <-- (P + K - 1) MOD 26 + 1
+
+Reto: no hace falta descifrar. Se cifra de nuevo con 26 - K, porque
+correr K y luego 26 - K es dar la vuelta completa.
+
+FUNCION posicion(X)
+   ABC <-- 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   P <-- 0
+   J <-- 1
+   MQ (J <= 26 Y P = 0) HAGA
+      SI (SUBSTR(ABC, J, 1) = X) ENTONCES
+         P <-- J
+      F_SI
+      J <-- J + 1
+   F_MQ
+   posicion <-- P
+F_FUNCION
+
+FUNCION cifrar(MSJ, K)
+   ABC <-- 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   R <-- ''
+   PARA I = 1, LONG(MSJ), 1 HAGA
+      X <-- SUBSTR(MSJ, I, 1)
+      P <-- posicion(X)
+      SI (P = 0) ENTONCES
+         R <-- R || X                    { no es letra: se copia }
+      SINO
+         NP <-- (P + K - 1) MOD 26 + 1
+         R <-- R || SUBSTR(ABC, NP, 1)
+      F_SI
+   F_PARA
+   cifrar <-- R
+F_FUNCION
+
+INICIO
+   LEA MSJ, K
+   C <-- cifrar(MSJ, K)
+   ESCRIBA C
+   ESCRIBA cifrar(C, 26 - K)
+FIN
+
+Verificacion con la Z y K = 3: (26 + 3 - 1) MOD 26 + 1 = 3 -> 'C'.
+
+El -1 y el +1 existen porque MOD trabaja en base 0 (0 a 25) y el
+alfabeto esta en base 1 (1 a 26): el mismo desfase de siempre.
+Se supone 0 <= K <= 26.
+
+
+==============================================================
+ EJERCICIO 6 - Cambio de base con cadenas
+==============================================================
+
+Es el B10 / Bres del Manual con el numero como cadena. Como
+a_decimal y de_decimal son FUNCIONES, el principal las compone en
+una sola linea, sin variables intermedias.
+
+FUNCION valido(NUM, B)
+   SW <-- 1
+   PARA I = 1, LONG(NUM), 1 HAGA
+      SI (VAL(SUBSTR(NUM, I, 1)) >= B) ENTONCES
+         SW <-- 0
+      F_SI
+   F_PARA
+   valido <-- SW
+F_FUNCION
+
+FUNCION a_decimal(NUM, B)
+   N <-- 0
+   PARA I = 1, LONG(NUM), 1 HAGA
+      N <-- N * B + VAL(SUBSTR(NUM, I, 1))
+   F_PARA
+   a_decimal <-- N
+F_FUNCION
+
+FUNCION de_decimal(N, B)
+   SI (N = 0) ENTONCES
+      R <-- '0'
+   SINO
+      R <-- ''
+      MQ (N > 0) HAGA
+         R <-- STR(N MOD B) || R         { el residuo va adelante }
+         N <-- (N - N MOD B) / B         { division entera }
+      F_MQ
+   F_SI
+   de_decimal <-- R
+F_FUNCION
+
+INICIO
+   LEA NUM, B1, B2
+   SI (valido(NUM, B1) = 1) ENTONCES
+      ESCRIBA de_decimal(a_decimal(NUM, B1), B2)
+   SINO
+      ESCRIBA NUM, ' no es valido en base ', B1
+   F_SI
+FIN
+
+Trazas:
+   '1011', 2 -> 3   a_decimal: 0, 1, 2, 5, 11
+                    de_decimal: residuos 2, 0, 1          -> 102
+   '725', 8 -> 5    a_decimal: 7, 58, 469
+                    de_decimal: residuos 4, 3, 3, 3       -> 3334
+   '129', 8 -> 5    el 9 no es valido en base 8
+
+- a_decimal va de izquierda a derecha multiplicando lo acumulado
+  por la base (Horner): no necesita potencias.
+- de_decimal saca los digitos del ultimo al primero, por eso
+  concatena adelante, igual que invertir.
+- N = 0 va aparte: sin eso el MQ no entra y devolveria ''.
+
+
+==============================================================
+ EJERCICIO 7 - Numeros escondidos en una frase
+==============================================================
+
+analizar es SUBRUTINA porque devuelve tres contadores. La frase se
+recorre armando la palabra letra por letra; al llegar a un espacio
+se evalua y se vacia. Truco de una linea: agregar un espacio al
+final para que la ultima palabra tambien se evalue.
+
+FUNCION es_numero(PAL)
+   DIG <-- '0123456789'
+   SW <-- 1
+   SI (LONG(PAL) = 0) ENTONCES
+      SW <-- 0
+   F_SI
+   I <-- 1
+   MQ (I <= LONG(PAL) Y SW = 1) HAGA
+      X <-- SUBSTR(PAL, I, 1)
+      ESTA <-- 0
+      PARA J = 1, 10, 1 HAGA
+         SI (SUBSTR(DIG, J, 1) = X) ENTONCES
+            ESTA <-- 1
+         F_SI
+      F_PARA
+      SI (ESTA = 0) ENTONCES
+         SW <-- 0
+      F_SI
+      I <-- I + 1
+   F_MQ
+   es_numero <-- SW
+F_FUNCION
+
+FUNCION primo(N)
+   C <-- 0
+   PARA D = 1, N, 1 HAGA
+      SI (N MOD D = 0) ENTONCES
+         C <-- C + 1
+      F_SI
+   F_PARA
+   SI (C = 2) ENTONCES
+      primo <-- 1
+   SINO
+      primo <-- 0
+   F_SI
+F_FUNCION
+
+FUNCION sumadiv(N)
+   S <-- 0
+   PARA D = 1, N - 1, 1 HAGA
+      SI (N MOD D = 0) ENTONCES
+         S <-- S + D
+      F_SI
+   F_PARA
+   sumadiv <-- S
+F_FUNCION
+
+SUBRUTINA analizar(FRA, CP, CPE, CO)
+   CP <-- 0
+   CPE <-- 0
+   CO <-- 0
+   F2 <-- FRA || ' '        { asi la ultima palabra termina en espacio }
+   PAL <-- ''
+   PARA I = 1, LONG(F2), 1 HAGA
+      X <-- SUBSTR(F2, I, 1)
+      SI (X <> ' ') ENTONCES
+         PAL <-- PAL || X
+      SINO
+         SI (es_numero(PAL) = 1) ENTONCES
+            N <-- VAL(PAL)
+            SI (primo(N) = 1) ENTONCES
+               CP <-- CP + 1
+            SINO
+               SI (sumadiv(N) = N) ENTONCES
+                  CPE <-- CPE + 1
+               SINO
+                  CO <-- CO + 1
+               F_SI
+            F_SI
+         F_SI
+         PAL <-- ''
+      F_SI
+   F_PARA
+F_SUBRUTINA
+
+INICIO
+   LEA FRA
+   EJECUTE analizar(FRA, A, B, C)
+   ESCRIBA 'Primos: ', A
+   ESCRIBA 'Perfectos: ', B
+   ESCRIBA 'Ninguno: ', C
+FIN
+
+Traza del ejemplo:
+   2026   no primo (par)   sumadiv = 1+2+1013 = 1016   -> ninguno
+   6      no primo         sumadiv = 1+2+3 = 6         -> perfecto
+   13     primo                                        -> primo
+   496    no primo         sumadiv = 496               -> perfecto
+   Resultado: 1 primo, 2 perfectos, 1 ninguno.
+
+Los SI van anidados porque un perfecto nunca es primo: cada numero
+cae en una sola categoria. Se piden enteros POSITIVOS porque
+sumadiv(0) da 0 y el 0 pasaria como perfecto.
+
+
+==============================================================
+ EJERCICIO 8 - Un vector de palindromos
+==============================================================
+
+Forma de punto de parcial: dos SUBRUTINAS (leer y construir un
+vector), dos FUNCIONES encadenadas y un SI en cascada al final. El
+vector P lleva su propio contador M; por eso extraer es SUBRUTINA.
+
+SUBRUTINA leer_vector(N, V)
+   LEA N
+   PARA I = 1, N, 1 HAGA
+      LEA V(I)
+   F_PARA
+F_SUBRUTINA
+
+FUNCION invertir(CAD)
+   R <-- ''
+   PARA I = 1, LONG(CAD), 1 HAGA
+      R <-- SUBSTR(CAD, I, 1) || R
+   F_PARA
+   invertir <-- R
+F_FUNCION
+
+FUNCION palindromo(CAD)
+   SI (CAD = invertir(CAD)) ENTONCES
+      palindromo <-- 1
+   SINO
+      palindromo <-- 0
+   F_SI
+F_FUNCION
+
+SUBRUTINA extraer(N, V, M, P)
+   M <-- 0
+   PARA I = 1, N, 1 HAGA
+      SI (palindromo(V(I)) = 1) ENTONCES
+         M <-- M + 1
+         P(M) <-- V(I)
+      F_SI
+   F_PARA
+F_SUBRUTINA
+
+INICIO
+   EJECUTE leer_vector(N, V)
+   EJECUTE extraer(N, V, M, P)
+   PARA I = 1, M, 1 HAGA
+      ESCRIBA P(I)
+   F_PARA
+   SI (M = 0) ENTONCES
+      ESCRIBA 'Ninguna palabra es palindroma'
+   SINO
+      SI (M = N) ENTONCES
+         ESCRIBA 'Todas son palindromas'
+      SINO
+         SI (M * 2 >= N) ENTONCES
+            ESCRIBA 'Al menos la mitad son palindromas'
+         SINO
+            ESCRIBA 'Menos de la mitad son palindromas'
+         F_SI
+      F_SI
+   F_SI
+FIN
+
+Con V = OSO, CASA, RADAR, ANA, LUZ: M = 3, P = OSO, RADAR, ANA.
+Como 3 * 2 = 6 >= 5 -> 'Al menos la mitad son palindromas'.
+
+Como calificarlo si se usa como simulacro:
+- El orden del SI en cascada importa: M = N antes que la mitad, o
+  "todas" nunca se escribiria.
+- M * 2 >= N evita dividir y no depende de si N es par o impar.
+- P(M) <-- V(I) va DESPUES de incrementar M; al reves, la primera
+  palabra cae en P(0), que en base 1 no existe.
+- Error frecuente: declarar extraer como FUNCION que "devuelve P".
+  Un vector nunca es el retorno de una FUNCION.

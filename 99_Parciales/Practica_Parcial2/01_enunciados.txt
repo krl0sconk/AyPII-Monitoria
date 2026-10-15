@@ -1,0 +1,223 @@
+==============================================================
+ PRACTICA PARCIAL 2 - Cadenas y Procedimientos
+ ENUNCIADOS (las soluciones estan en 02_soluciones.txt)
+==============================================================
+
+Todo en pseudocodigo, en papel, sin compilador.
+Convenciones: 00_Recursos/Convenciones_Pseudocodigo.md
+
+Repaso rapido, con C <-- 'MONITORIA':
+   LONG(C)            -> 9
+   IZQ(C, 4)          -> 'MONI'
+   DER(C, 3)          -> 'RIA'
+   SUBSTR(C, 3, 4)    -> 'NITO'
+   VAL('42')          -> 42
+   STR(42)            -> '42'
+   'AB' || 'CD'       -> 'ABCD'   (el orden importa)
+
+FUNCION  -> devuelve UN valor (numero, 0/1 o una cadena completa)
+SUBRUTINA -> varios valores, un vector, o solo una accion (EJECUTE)
+
+
+==============================================================
+ CALENTAMIENTO
+==============================================================
+
+--------------------------------------------------------------
+ EJERCICIO 1A - Que queda en cada variable?
+--------------------------------------------------------------
+
+   C <-- 'ALGORITMIA'
+   A <-- LONG(C)
+   B <-- IZQ(C, 4)
+   D <-- DER(C, 3)
+   E <-- SUBSTR(C, 5, 3)
+   F <-- D || B
+   G <-- SUBSTR(C, A - 1, 2) || STR(A * 2)
+   H <-- VAL(SUBSTR('2026', 3, 2)) + 1
+
+   Llene la tabla: A, B, D, E, F, G, H.
+
+
+--------------------------------------------------------------
+ EJERCICIO 1B - La funcion misterio
+--------------------------------------------------------------
+
+   FUNCION misterio(CAD)
+      R <-- ''
+      PARA I = 1, LONG(CAD), 2 HAGA
+         R <-- SUBSTR(CAD, I, 1) || R
+      F_PARA
+      misterio <-- R
+   F_FUNCION
+
+   Haga la traza y diga que escribe:
+      ESCRIBA misterio('PROGRAMA')
+      ESCRIBA misterio(misterio('PARCIAL'))
+
+   Luego, en una frase: que hace la funcion?
+
+
+--------------------------------------------------------------
+ EJERCICIO 2 - FUNCION o SUBRUTINA? Justifique
+--------------------------------------------------------------
+
+   a. Contar las vocales de una frase.
+   b. Invertir una cadena.
+   c. Separar una frase en un vector de palabras.
+   d. Decir si una palabra es palindroma.
+   e. Hallar la palabra mas larga y su posicion.
+   f. Escribir cada palabra de una frase en una linea.
+
+   Una respuesta sin justificacion vale cero: diga QUE devuelve y
+   CUANTAS cosas son.
+
+
+==============================================================
+ NIVEL 1 - Cadenas con funciones
+==============================================================
+
+--------------------------------------------------------------
+ EJERCICIO 3 - Buscar y reemplazar
+--------------------------------------------------------------
+
+Lea una frase FRA y dos palabras P1 y P2. Escriba cuantas veces
+aparece P1 en la frase y la frase nueva en la que cada P1 fue
+reemplazada por P2. P1 y P2 pueden tener longitudes distintas.
+
+Debe escribir:
+   - FUNCION contar(FRA, P)
+   - FUNCION reemplazar(FRA, P1, P2)
+   - El programa principal
+
+Ejemplo:
+   FRA = 'el gato y el perro y el loro'   P1 = 'el'   P2 = 'un'
+   Apariciones: 3
+   un gato y un perro y un loro
+
+
+--------------------------------------------------------------
+ EJERCICIO 4 - Anagramas
+--------------------------------------------------------------
+
+Dos palabras son anagramas si tienen las mismas letras, la misma
+cantidad de veces. Lea pares de palabras hasta que la primera sea
+'FIN'. Escriba cada par que sea anagrama y, al final, cuantos pares
+lo fueron.
+
+Debe escribir:
+   - FUNCION veces(CAD, X): cuantas veces esta el caracter X
+   - FUNCION anagramas(A, B) que use veces
+   - El programa principal
+
+Ejemplo:
+   Entrada:  ROMA AMOR / ROMA ROMO / SAL LAS / FIN
+   Salida:   ROMA y AMOR son anagramas
+             SAL y LAS son anagramas
+             Pares de anagramas: 2
+
+
+==============================================================
+ NIVEL 2 - Procedimientos que se llaman entre si
+==============================================================
+
+--------------------------------------------------------------
+ EJERCICIO 5 - Cifrado Cesar
+--------------------------------------------------------------
+
+Cada letra de un mensaje en mayusculas (sin N con tilde) se corre K
+posiciones en el alfabeto; despues de la Z se vuelve a la A. Lo que
+no es letra se copia igual. Lea el mensaje y K, escriba el mensaje
+cifrado y luego el original, recuperado a partir del cifrado.
+
+Debe escribir:
+   - FUNCION posicion(X): lugar de X en el alfabeto, 0 si no esta
+   - FUNCION cifrar(MSJ, K)
+
+Ejemplo:
+   MSJ = 'HOLA MUNDO'   K = 3
+   KROD PXQGR
+   HOLA MUNDO
+
+Reto: recuperar el original SIN escribir una funcion descifrar.
+
+
+--------------------------------------------------------------
+ EJERCICIO 6 - Cambio de base con cadenas
+--------------------------------------------------------------
+
+Un numero en base B1 se lee como CADENA (2 <= B1, B2 <= 10). Si todos
+sus digitos son validos en B1, escribalo en base B2; si no, avise que
+no es valido.
+
+Debe escribir:
+   - FUNCION valido(NUM, B)
+   - FUNCION a_decimal(NUM, B): devuelve un numero
+   - FUNCION de_decimal(N, B): devuelve una cadena
+   - Un principal que las componga en una sola linea
+
+Ejemplos:
+   '1011', B1 = 2, B2 = 3   ->  102
+   '725',  B1 = 8, B2 = 5   ->  3334
+   '129',  B1 = 8, B2 = 5   ->  no es valido en base 8
+
+
+==============================================================
+ NIVEL 3 - Integradores estilo parcial
+==============================================================
+
+--------------------------------------------------------------
+ EJERCICIO 7 - Numeros escondidos en una frase
+--------------------------------------------------------------
+
+Una frase tiene palabras y enteros positivos, separados por un solo
+espacio. Recorriendola palabra por palabra, cuente cuantos de sus
+numeros son primos, cuantos son perfectos y cuantos ninguna de las
+dos cosas.
+
+Debe escribir:
+   - SUBRUTINA analizar(FRA, CP, CPE, CO)
+   - FUNCION es_numero(PAL)
+   - FUNCION primo(N) y FUNCION sumadiv(N)
+
+Ejemplo:
+   'en 2026 vi 6 aves 13 ranas y 496 hormigas'
+   Primos: 1
+   Perfectos: 2
+   Ninguno: 1
+
+
+--------------------------------------------------------------
+ EJERCICIO 8 - Un vector de palindromos   (cronometro: 20 min)
+--------------------------------------------------------------
+
+Lea N palabras en un vector V. Construya otro vector P solo con las
+palabras palindromas y escribalo. Termine con UN UNICO mensaje:
+   - ninguna es palindroma
+   - todas son palindromas
+   - al menos la mitad lo son
+   - menos de la mitad lo son
+
+Debe escribir:
+   - SUBRUTINA leer_vector(N, V)
+   - FUNCION invertir(CAD)
+   - FUNCION palindromo(CAD)          (debe usar invertir)
+   - SUBRUTINA extraer(N, V, M, P)
+   - INICIO ... FIN
+
+Ejemplo:
+   V = OSO, CASA, RADAR, ANA, LUZ
+   P = OSO, RADAR, ANA
+   Al menos la mitad son palindromas
+
+
+==============================================================
+ ANTES DE ENTREGAR - lo que mas puntos quita
+==============================================================
+
+1. Tope al buscar una palabra: LONG(FRA) - LONG(P) + 1, no LONG(FRA).
+2. Orden de la concatenacion: X || R copia al reves; R || X copia igual.
+3. Olvidar retornar: toda FUNCION termina con nombre <-- resultado.
+4. Mezclar numero y cadena: VAL antes de sumar, STR antes de concatenar.
+5. PARA con salto variable: si el indice avanza distinto cada vez, es MQ.
+6. FUNCION con dos salidas: si devuelve mas de un dato, es SUBRUTINA.
